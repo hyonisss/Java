@@ -1,0 +1,28 @@
+package edu.scsa.day1;
+
+import java.util.Scanner;
+
+public class Hello {
+	public static void main(String[] args) {
+		//System.out.println("안녕하세요 효은 입니다...");
+		
+		/*
+		 * Scanner sc = new Scanner(System.in);
+		 * System.out.println("점수를 입력하세요.. 0부터 100 사이 입니다"); int num = sc.nextInt();
+		 * System.out.println("num : " + num); sc.close();
+		 */
+		
+		//키보드로 부터 입력된 값을 받아 짝수면 4는 짝수입니다..라고 출력하고 홀수는 3은 홀수입니다.라고
+		//출력하세요
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("값을 입력하세요");
+		int n = sc2.nextInt();
+		if(n%2==0)
+		{
+			System.out.println(n + "은 짝수입니다..");
+		}
+		else System.out.println(n + "은 홀수입니다..");
+		sc2.close();
+	}
+
+}
