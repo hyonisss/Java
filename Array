@@ -159,5 +159,49 @@ public class EngManager {
 }
 
 
+======================================================================
+<testArray.java>
+
+package edu.scsa.day2;
+
+public class testArray {
+
+	public static void main(String[] args) {
+
+		// 정수의 배열 생성, 데이터 입력, 조회...
+		int[] arr = new int[5];
+
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		int[] arr1 = { 1, 2, 3, 4, 5 }; // 선언, 생성, 값할당 동시에
+		int[][] arr2D = { { 1, 2 }, { 3, 4 } };
+
+		// --------------객체형태의 배열 생성
+		Engineer[] engArr = new Engineer[3];
+		engArr[0] = new Engineer("홍길동", "대리", "총무팀", 3000000, 8.99);
+		engArr[1] = new Engineer("박지성", "과장", "회계팀", 250000, 9.00);
+
+		// 입력된 Enginner의 showInfo 함수를 이용하여 배열에 저장된 정보를 출력하세요..:for문 이용
+		for (int i = 0; i < engArr.length; i++) {
+			if (engArr[i] != null) {
+				engArr[i].showInfo();
+			}
+		}
+
+		arrayCopy();
+	}
+
+	public static void arrayCopy() {
+		String[] strArr = { "떡볶이", "추어탕", "피자", "삼겹살" };
+		String[] newArr = new String[8];
+		System.arraycopy(strArr, 0, newArr, 0, strArr.length); //
+
+		for (int i = 0; i < newArr.length; i++) {
+			System.out.println(newArr[i]);
+		}
+	}
+
+}
 
 
