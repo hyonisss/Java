@@ -1,0 +1,52 @@
+public class Test {
+   public static void main(String[] args) {
+      test();
+      }
+      
+      public void test() {
+        int c= 10;
+        System.out.println("C : "+c);
+        }
+        
+ }
+ 
+*******************************************************************
+
+위 코드는 에러남
+에러가 안나게 하려면?
+
+*******************************************************************
+방법1)
+
+public class Test {
+   public static void main(String[] args) {
+      test();
+      }
+      
+      public static void test() { // static 붙이기
+         int c= 10;
+        System.out.println("C : "+c);
+        }
+        
+ }
+ 
+*******************************************************************
+
+방법2)
+
+public class Test {
+   public static void main(String[] args) {
+      Test t = new Test(); // 객체 생성
+      t.test();
+      }
+      
+      public void test() {
+        int c= 10;
+        System.out.println("C : "+c);
+        }
+        
+ }
+ 
+ 
+ java는 무조건 객체를 생성해야 클래스 사용 가능
+ static은 객체생성 
