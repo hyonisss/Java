@@ -49,4 +49,4 @@ public class Test {
  
  
  java는 무조건 객체를 생성해야 클래스 사용 가능
- static은 객체생성 
+ static은 객체를 생성하지 않고도 사용 가능
