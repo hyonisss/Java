@@ -1,0 +1,137 @@
+<Device.java>
+package edu.scsa.day2.device;
+
+public class Device {
+	//변수 선언
+	private String model;
+	private double size;
+	private String category;
+	private int price;
+	//생성자
+	public Device(String model, double size, String category, int price)
+	{
+		this.model = model;
+		this.size = size;
+		this.category= category;
+		this.price = price;
+	}
+	
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public double getSize() {
+		return size;
+	}
+
+	public void setSize(double size) {
+		this.size = size;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	//메소드
+	public void showDevInfo()
+	{
+		System.out.println(toString());
+	}
+	
+	public String toString()
+	{
+		return "model: "+this.model+", size: "+this.size+", category: "+this.category+", price: "+this.price;
+	}
+	
+}
+
+=============================================================================
+<SmartPhone.java>
+
+package edu.scsa.day2.device;
+
+public class DeviceTest {
+
+	public static void main(String[] args) {
+		
+		SmartPhone sp1 = new SmartPhone("GA_SM_001",8.8, "SP", 150000, 128);
+		sp1.showDevInfo();
+		
+		SmartTV st1 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		st1.showDevInfo();
+	}
+
+}
+
+==========================================================================
+<SmartTV.java>
+
+package edu.scsa.day2.device;
+
+public class SmartTV extends Device {
+	private String installType;
+
+	// 생성자
+
+	public SmartTV(String model, double size, String category, int price) {
+		super(model, size, category, price);
+	}
+
+	public SmartTV(String model, double size, String category, int price, String installType) {
+		super(model, size, category, price);
+		this.installType = installType;
+	}
+
+	public String getInstallType() {
+		return installType;
+	}
+
+	public void setInstallType(String installType) {
+		this.installType = installType;
+	}
+
+	// 메소드
+	public void playMovie(String title) {
+		System.out.println(title + "을 play 합니다...");
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+", installType: "+installType;
+	}
+}
+
+====================================================================
+<DeviceTest.java>
+package edu.scsa.day2.device;
+
+public class DeviceTest {
+
+	public static void main(String[] args) {
+		
+		SmartPhone sp1 = new SmartPhone("GA_SM_001",8.8, "SP", 150000, 128);
+		sp1.showDevInfo();
+		
+		SmartTV st1 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		st1.showDevInfo();
+	}
+
+}
+
+
