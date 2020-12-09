@@ -1,5 +1,4 @@
-package edu.scsa.day3;
-
+[Static Variable]
 class Counter {
 	static int numCall = 0;
 	public Counter() {
@@ -20,3 +19,45 @@ public class StaticVariable {
 	}
 
 }
+
+================================================================================================
+[static block]
+
+public class StaticInitializer{
+	static{ //main보다 먼저 
+		System.out.println("SI 1");
+	}
+
+	public StaticInitializer(){
+		System.out.println("Constructor");
+	}
+
+	static{
+		System.out.println("SI 2");
+	}
+	
+	public static void main(String[] args){
+		System.out.println("START main()");
+		StaticInitializer s = new StaticInitializer();
+		System.out.println("End Of main()");
+	}
+
+	static{
+		System.out.println("SI 3");
+	}
+
+	{
+		System.out.println("�� { } �Դϴٿ�...");
+	}
+}
+
+
+<Console>
+
+SI 1
+SI 2
+SI 3
+START main()
+�� { } �Դϴٿ�...
+Constructor
+End Of main()
