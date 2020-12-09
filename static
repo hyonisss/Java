@@ -61,3 +61,43 @@ START main()
 �� { } �Դϴٿ�...
 Constructor
 End Of main()
+
+==============================================================================================
+[superman]
+class SuperMan {
+	public void getHome(){
+		System.out.println("superman의 고향은 : 크립톤나일 행성");
+	}
+	private SuperMan(){ //한 번만 생성될 수도 있도록 private으로 설정
+		System.out.println("슈퍼맨은 한번만 생성 : "+this);
+	}
+	private static SuperMan sm = new SuperMan(); //프로그램 실행될 때 단 한 번만 실행
+
+	public static SuperMan getInstance(){ //객체을 외불에서 접근할 수 있도록
+		System.out.println("누가 나를 부르나..");
+		return sm;
+	}
+}
+
+public class SuperManCall{
+	public static void main(String args[]){
+		SuperMan.getInstance().getHome();
+		SuperMan superman=SuperMan.getInstance();
+		System.out.println(superman);
+		System.out.println(SuperMan.getInstance());
+
+	}
+}
+
+<console>
+슈퍼맨은 한번만 생성 : SuperMan@2f92e0f4
+누가 나를 부르나..
+superman의 고향은 : 크립톤나일 행성
+누가 나를 부르나..
+SuperMan@2f92e0f4
+누가 나를 부르나..
+SuperMan@2f92e0f4
+
+
+
+
