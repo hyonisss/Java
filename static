@@ -1,0 +1,22 @@
+package edu.scsa.day3;
+
+class Counter {
+	static int numCall = 0;
+	public Counter() {
+		numCall++;
+	}
+}
+public class StaticVariable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(Counter.numCall); //0
+		Counter c1 = new Counter();
+		System.out.println(c1.numCall); //1
+		System.out.println(Counter.numCall); //1
+		Counter c2 = new Counter();
+		System.out.println(c2.numCall); //2
+		System.out.println(Counter.numCall);//2
+	}
+
+}
