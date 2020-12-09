@@ -1,0 +1,35 @@
+package edu.scsa.day3;
+
+abstract class Car {
+	public void play(String music) {
+		System.out.println(music+ " play");
+	}
+	public abstract void run();
+	public abstract void stop();
+	
+}
+
+class Taxi extends Car {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		System.out.println("택시가 달립니다.");
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		System.out.println("택시가 멈춥니다.");
+	}
+	
+}
+public class TestAbstract {
+	public static void main(String[] args) {
+		
+		Taxi t = new Taxi();
+		t.stop();
+		t.run();
+	}
+
+}
