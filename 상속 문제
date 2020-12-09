@@ -1,0 +1,239 @@
+<Book.java>
+package edu.scsa.ws.day1;
+
+public class Book {
+	private String isbn;
+	private String title;
+	private String author;
+	private String publisher;
+	private int price;
+	private String desc;
+
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Book(String isbn, String title, String author, String publisher, int price, String desc) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+		this.publisher = publisher;
+		this.price = price;
+		this.desc = desc;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	@Override
+	public String toString() {
+		return "isbn=" + isbn + ", title=" + title + ", author=" + author + ", publisher=" + publisher
+				+ ", price=" + price + ", desc=" + desc ;
+	}
+}
+
+========================================================================================
+<Magazine.java>
+
+package edu.scsa.ws.day1;
+
+public class Magazine extends Book{
+
+	private int year;
+	private int month;
+
+
+
+
+	public Magazine() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Magazine(String isbn, String title, String author, String publisher, int price, String desc,int year, int month) {
+		super(isbn, title, author, publisher, price, desc);
+		this.year = year;
+		this.month = month;
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+", year=" + year + ", month=" + month;
+	}
+
+}
+
+====================================================================================
+<BookManager.java>
+package edu.scsa.ws.day1;
+
+public class BookManager {
+	// 변수 선언
+	private Book[] b;
+	private int index;
+
+	// 생성자
+	public BookManager() {
+		this.b = new Book[3];
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	// 메소드
+	public void add(Book book) {
+		
+		if(index == b.length) {
+			Book[] tempArr = b;
+			//기존 배열의 크기를 새로 생성된 배열을 이용해서 늘린다...
+			b = new Book[tempArr.length*2];
+			System.arraycopy(tempArr, 0, b, 0, tempArr.length);
+		}
+		System.out.println("현재 저장공간의 크기: "+b.length +", 인덱스: "+index);
+		b[index] = book;
+		index++;
+
+	}
+
+	public void showallInfo() {
+		
+		for (Book book : b) {
+			if(book!=null) {
+			System.out.println(book.toString());
+			}
+		}
+	}
+
+	public Book[] getAllBook() {
+		return this.b;
+	}
+
+	public Book search(String isbn) {
+		for (int i = 0; i < index; i++) {
+			if(b[i].getIsbn().equals(isbn)) {
+				return b[i];
+			}
+		}
+		System.out.println(isbn+"은 없습니다.");
+		return null;
+	}
+	 
+
+	public void searchTitle(String title) {
+		for (int i = 0; i < index; i++) {
+			if(b[i].getTitle().equals(title)) {
+				System.out.println(b[i].toString());
+				return;
+			}
+		}
+		System.out.println(title + "은 없습니다.");
+
+	}
+
+}
+===================================================================
+<BookTest.java>
+
+package edu.scsa.ws.day1;
+
+public class BookTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BookManager bm = new BookManager();
+		Book b1 = new Book("21424", "Java Pro", "김하나", "Jaen.kr", 15000, "Java 기본 문법");
+		Book b2 = new Book("35355", "OOAD 분석,설계", "소나무", "Jaen.kr", 30000, " ");
+		Book m1 = new Magazine("35355", "Java World", "편집부", "androidjava.com",7000, " ",2013,2);
+		Book m2 = new Magazine("13567", "C World", "편집부", "hyoeun.com",500000, "YeokSam",2020,7);
+		bm.add(b1);
+		bm.add(b2);
+		bm.add(m1);
+		bm.add(m2);
+		
+		System.out.println("===getAllBook Test===");
+		for (int i = 0; i < bm.getAllBook().length; i++) {
+			System.out.println(bm.getAllBook()[i]);
+		}
+		
+		System.out.println("===showallInfo Test===");
+		bm.showallInfo();
+		
+		System.out.println("===searchIsbn Test===");
+		System.out.println(bm.search("21424"));
+		
+		System.out.println("===searchTitle Test===");
+		bm.searchTitle("Java Pro");
+
+	}
+
+}
