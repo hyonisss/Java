@@ -1,0 +1,56 @@
+package edu.scsa.day3;
+
+class A {
+	private String name;
+	private int age;
+	
+	public void test() {
+		System.out.println("A 클래스 test 입니다...");
+	}
+}
+class B extends A {
+
+	@Override
+	public void test() {
+		System.out.println("B 클래스 test 입니다...");
+	}
+	public void b_call() {
+		System.out.println("b call");
+	}
+
+}
+
+class C extends A {
+
+	@Override
+	public void test() {
+		System.out.println("C 클래스 test 입니다...");
+	}
+	public void c_call() {
+		System.out.println("c call");
+	}
+	
+}
+
+public class Test {
+	public static void main(String[] args) {
+//		A a = new A();
+//		a.test();
+//		B b = new B();
+//		b.test();
+//		A a1 = new B();
+//		a1.test(); // b클래스가 호출됨 (부모와 자식 둘 다 있으면 자식꺼 호출)
+		A a1 = new B();
+		//a1.b_call(); 에러남 (부모 클래스에 없는 함수이기 때문)
+		if(a1 instanceof B){
+			B b1 = (B)a1;
+			b1.b_call(); 
+		}else if(a1 instanceof C) {
+			C c1 = (C)a1;
+			c1.c_call();
+		} else if(a1 instanceof A) {
+			System.out.println("A 타입 입니다");
+		}
+		
+	}
+}
