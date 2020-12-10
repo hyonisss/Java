@@ -1,0 +1,93 @@
+package edu.scsa.day4.device;
+
+import java.util.*;
+
+/*
+ * 
+ * 1.장비 추가
+ * -추가할 장비 정보를 입력하세요 : SP, ST
+ * -모델, 카테고리, 사이즈, 가격, 장착타입/메모리..
+ * -정상 추가되면 : 정상 저장되었습니다... / 이미 등록된 장비입니다...
+ * 2. 전체 장비 정보 조회
+ * -전체 장비 표출...
+ * 3. 특정 장비 정보 조회
+ * -조회할 장비 모델명을 입력하세요..
+ * -GM1 ~~ / 해당 모델 없습니다..
+ * 4. 장비 삭제
+ * - 삭제할 장비 모델명을 입력하세요..
+ * - 결과 표출
+ * Q. 프로그램 종료
+ * -프로그램 종료됩니다... 종료~
+ * 
+ */
+public class DeviceNewTest {
+
+	public static void main(String[] args) {
+		String model, category, installType;
+		int price, ram, res;
+		Device ret;
+		double size;
+
+		// TODO Auto-generated method stub
+		DeviceNewManager newmgr = DeviceNewManager.getInstance();
+		System.out.println("Menu");
+		System.out.println("1. 장비 추가");
+		System.out.println("2. 전체 장비 정보 조회");
+		System.out.println("3. 특정 장비 정보 조회");
+		System.out.println("4. 장비 삭제");
+		System.out.println("Q. 프로그램 종료");
+		Scanner sc = new Scanner(System.in);
+		while(true)
+		{
+			System.out.println("메뉴를 선택하세요");
+			String menu = sc.next();
+			if(menu.equals("1")) {
+				System.out.println("추가할 장비 정보를 입력하세요");
+				category = sc.next();
+				System.out.println("모델?"); model = sc.next();
+				System.out.println("사이즈?"); size = sc.nextDouble();	
+				System.out.println("가격?"); price = sc.nextInt();
+				if(category.equals("SP")) {
+					//	public SmartPhone(String model, double size, String category, int price, int ram)
+					System.out.println("ram?"); ram = sc.nextInt();
+					Device newdev = new SmartPhone(model, size, category, price, ram);
+					res = newmgr.addDevice(newdev);
+					if(res==1) System.out.println("정상 추가 되었습니다..");
+					else System.out.println("이미 등록된 장비입니다..");
+				}
+				else if(category.equals("ST")){
+					System.out.println("installType?"); installType = sc.next();
+					Device newdev = new SmartTV(model, size, category, price, installType);
+					res = newmgr.addDevice(newdev);
+					if(res==1) System.out.println("정상 추가 되었습니다..");
+					else System.out.println("이미 등록된 장비입니다..");
+				}
+			} else if(menu.equals("2")) {
+				for (Device device : newmgr.getAllDevice()) {
+					System.out.println(device.toString());
+				}
+			} else if(menu.equals("3")) {
+				System.out.println("조회할 장비 모델명을 입력하세요..");
+				model = sc.next();
+				ret = newmgr.getDevice(model);
+				if(ret == null) System.out.println("해당 모델 없습니다..");
+				else System.out.println(ret.toString());
+				
+			} else if(menu.equals("4")) {
+				System.out.println("삭제할 장비 모델명을 입력하세요..");
+				model = sc.next();
+				res = newmgr.deleteDevice(model);
+				if(res==1) System.out.println("삭제되었습니다");	
+				else if (res == 3) System.out.println("해당 모델 없습니다..");
+				
+			} else if(menu.equals("Q")||menu.equals("q")) {
+				System.out.println("프로그램 종료됩니다...");
+				break;
+			} else {
+				System.out.println("잘못입력하셨습니다");
+				continue;
+			}
+		}
+	}
+
+}
