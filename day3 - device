@@ -1,0 +1,144 @@
+<Device.java>
+package edu.scsa.day4.device;
+
+public class Device {
+	//변수 선언
+	private String model;
+	private double size;
+	private String category;
+	private int price;
+	//생성자
+	public Device(String model, double size, String category, int price)
+	{
+		this.model = model;
+		this.size = size;
+		this.category= category;
+		this.price = price;
+	}
+	
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public double getSize() {
+		return size;
+	}
+
+	public void setSize(double size) {
+		this.size = size;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	//메소드
+	public void showDevInfo()
+	{
+		System.out.println(toString());
+	}
+	
+	public String toString()
+	{
+		return "model: "+this.model+", size: "+this.size+", category: "+this.category+", price: "+this.price;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj!=null && obj instanceof Device) {
+			Device cmp = (Device) obj;
+			if(model.equals(cmp.model) &&category.equals(cmp.category)) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+========================================================================================
+<DeviceMgr.java>
+package edu.scsa.day4.device;
+
+public class DeviceMgr {
+	
+	private static DeviceMgr devMgr = new DeviceMgr();
+	
+	//폰, TV 저장할 배열 선언 : 5개
+	private Device devArr[];
+	private int index;
+	
+	//생성자
+	private DeviceMgr() {
+		devArr = new Device[5];
+	}
+	public static DeviceMgr getInstance() {
+		return devMgr;
+	}
+	
+	//정상 추가되면 true, 추가 x false 리턴
+	public boolean addDevice(Device dev) {
+		//기존에 값이 추가되어 있으면 추가하지 말것...
+		if(index>=devArr.length) return false;
+		for (Device device : getAllDevice()) {
+			if(device.equals(dev)) return false;
+		}
+		devArr[index++] = dev;
+		return true;
+	}
+	
+	//전체 디바이스 정보 출력...
+	public void showAllDevInfo() {
+		for (Device device : getAllDevice()) {
+			System.out.println(device.toString());
+		}
+	}
+	
+	//정상적으로 들어가 있는 데이터만 배열로 만들어 return
+	public Device[] getAllDevice() {
+		Device tmpArr[] = new Device[index];
+		System.arraycopy(devArr, 0, tmpArr, 0, index);
+		return tmpArr;
+	}
+	
+}
+========================================================================================
+<DeviceTest.java>
+
+package edu.scsa.day4.device;
+
+public class DeviceTest {
+
+	public static void main(String[] args) {
+		
+		DeviceMgr mgr = DeviceMgr.getInstance();
+
+		SmartPhone sp1 = new SmartPhone("GA_SM_001",8.8, "SP1", 150000, 128);
+		SmartPhone sp3 = new SmartPhone("GA_SM_001",7.0, "SP3", 80000, 128);
+		SmartPhone sp2 = new SmartPhone("GA_SM_002",11.9, "SP2", 75000, 64);
+		SmartTV st1 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		SmartTV st2 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		
+		int res1 = mgr.addDevice(st1);
+		int res2 = mgr.addDevice(st2);
+		int res3 = mgr.addDevice(sp1);
+		int res4 = mgr.addDevice(sp2);
+		System.out.println("res1 : " + res1 + ", res2 :" + res2+ ", res3 :" + res3+ ", res4 :" + res4);
+
+	}
+
+}
