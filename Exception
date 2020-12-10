@@ -1,0 +1,22 @@
+package edu.scsa.day4;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+public class TestException {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("main start");
+		try {
+			FileInputStream fileIn = new FileInputStream("myData.txt");
+			System.out.println("파일을 정상적으로 읽고 있습니다");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("해당 파일이 없습니다");
+		}
+		System.out.println("main end");
+		
+	}
+
+}
