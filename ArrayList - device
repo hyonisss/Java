@@ -1,0 +1,126 @@
+<DeviceNewManager.java>
+
+package edu.scsa.day4.device;
+/*
+ * IDevice implements 받아 구현
+ * 데이터 저장 : ArrayList
+ * 싱글턴...
+ * 
+ */
+import java.util.*;
+
+public class DeviceNewManager implements IDevice{
+	List<Device> arrList = new ArrayList<Device>();
+	private static DeviceNewManager devNewMgr = new DeviceNewManager();
+	private int index = 0;
+	private DeviceNewManager() {
+		
+	}
+	public static DeviceNewManager getInstance() {
+		return devNewMgr;
+	}
+
+	@Override
+	public int addDevice(Device dev) {
+		// TODO Auto-generated method stub
+		for (Device device : arrList) {
+			if(device.getModel().equals(dev.getModel())) {
+				return Constant.DUPLICATED_ID;
+			}
+		}
+		arrList.add(dev);
+		return Constant.OK;
+	}
+
+	@Override
+	public Device[] getAllDevice() {
+		// TODO Auto-generated method stub
+		Device[] devArr = new Device[arrList.size()];
+		arrList.toArray(devArr);
+		return devArr;
+	}
+
+	@Override
+	public Device getDevice(String mod) {
+		// TODO Auto-generated method stub
+		for (Device device : arrList) {
+			if(device.getModel().equals(mod)) return device;
+		}
+		return null;
+	}
+
+	@Override
+	public int deleteDevice(String mod) {
+		// TODO Auto-generated method stub
+		Device dev = getDevice(mod);
+		if(dev!=null) {
+			arrList.remove(dev);
+			return Constant.OK;
+		}
+		return Constant.ID_NOT_FOUND;
+	}
+
+	@Override
+	public int updateDevice(Device dev) {
+		// TODO Auto-generated method stub
+		Device device = getDevice(dev.getModel());
+		if(device != null) {
+			device.setPrice(dev.getPrice());
+			device.setSize(dev.getSize());
+			return Constant.OK;
+		}
+
+		return Constant.ID_NOT_FOUND;
+	}
+
+}
+
+====================================================================================
+<Constant.java>
+
+package edu.scsa.day4.device;
+
+public class Constant {
+	public static final int OK = 1;
+	public static final int DUPLICATED_ID = 2;
+	public static final int ID_NOT_FOUND = 3;
+
+}
+
+====================================================================================
+<DeviceTest.java>
+
+package edu.scsa.day4.device;
+
+public class DeviceTest {
+
+	public static void main(String[] args) {
+
+		DeviceNewManager newmgr = DeviceNewManager.getInstance();
+		SmartPhone sp1 = new SmartPhone("GA_SM_001",8.8, "SP1", 150000, 128);
+		SmartPhone sp3 = new SmartPhone("GA_SM_001",7.0, "SP3", 80000, 128);
+		SmartPhone sp2 = new SmartPhone("GA_SM_002",11.9, "SP2", 75000, 64);
+		SmartTV st1 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		SmartTV st2 =  new SmartTV("SM_TV_001", 75, "TV", 3000000, "스탠드");
+		
+		int res1 = newmgr.addDevice(st1);
+		int res2 = newmgr.addDevice(st2);
+		int res3 = newmgr.addDevice(sp1);
+		int res4 = newmgr.addDevice(sp2);
+		System.out.println("res1 : " + res1 + ", res2 :" + res2+ ", res3 :" + res3+ ", res4 :" + res4);
+		
+		
+		for(int i=0; i<newmgr.getAllDevice().length; i++)
+		{
+			System.out.println(newmgr.getAllDevice()[i].toString());
+		}
+		System.out.println("============================");
+		newmgr.updateDevice(sp3);
+		newmgr.deleteDevice("GA_SM_002");
+		for(int i=0; i<newmgr.getAllDevice().length; i++)
+		{
+			System.out.println(newmgr.getAllDevice()[i].toString());
+		}
+	}
+
+}
