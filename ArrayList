@@ -1,0 +1,60 @@
+package edu.scsa.day4;
+
+import java.util.ArrayList;
+
+class A {
+	public void test() { System.out.println("A...");
+}
+public class TestCollection {
+	public static void main(String[] args) {
+		
+		//생성 및 데이터 추가
+		ArrayList arrList = new ArrayList();
+		arrList.add("Hello");
+		arrList.add(new A());
+		arrList.add("Hello");
+		arrList.add(3);
+		
+		//조회
+		for (Object object : arrList) {
+			System.out.println(object);
+		}
+		System.out.println("===========================");
+		for (int i = 0; i < arrList.size(); i++) {
+			System.out.println(arrList.get(i));
+		}
+			
+	}
+}
+
+
+====================================================================================
+
+package edu.scsa.day4;
+
+import java.util.ArrayList;
+
+class A {
+	public void test() { System.out.println("A...");
+}
+public class TestCollection {
+	public static void main(String[] args) {
+		
+		//생성 및 데이터 추가
+		ArrayList<String> arrList = new ArrayList<String>();
+		arrList.add("Hello");
+		arrList.add(new A()); //Error
+		arrList.add("Hello");
+		arrList.add(3); //Error
+		
+		//조회
+		for (Object object : arrList) {
+			System.out.println(object);
+		}
+		System.out.println("===========================");
+		for (int i = 0; i < arrList.size(); i++) {
+			System.out.println(arrList.get(i));
+		}
+			
+	}
+}
