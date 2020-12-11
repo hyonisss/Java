@@ -1,3 +1,4 @@
+<Try Catch>
 package edu.scsa.day5;
 
 import java.io.FileInputStream;
@@ -38,6 +39,39 @@ public class TestException {
 		}
 		System.out.println("main end");
 		
+	}
+
+}
+===================================================================================
+<Throws>
+
+package edu.scsa.day5;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+class MyFileReader {
+	
+	public void fileRead(String name) throws IOException {
+		FileInputStream fileIn = new FileInputStream(name);
+		int cnt = fileIn.read();
+		System.out.println("Data :" +cnt);
+		System.out.println("파일을 정상적으로 읽고 있습니다");
+		
+	}
+}
+public class TestException1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyFileReader fileReader = new MyFileReader();
+		try {
+			fileReader.fileRead("myData.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			//Log 저장...사용자한테 nofity...
+		}
 	}
 
 }
