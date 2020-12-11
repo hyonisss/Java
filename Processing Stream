@@ -1,0 +1,54 @@
+package edu.scsa.day5;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/*
+ * 
+ * 1. MyData.txt 파일을 읽어서 콘솔에 파일의 내용을 출력해 보자...
+ * 
+ * 2. 파일을 읽는다 : FileInputStream으로 파일 읽는다
+ *  
+ * 3. 최종적으로 BufferedReader의 readLine() 을 이용하여 문서의 내용을 출력하고 싶다..
+ * 
+ * 4. 중간에서 변환시켜주는 InputStreamReader를 이용하여 변환 후 BufferedReader 사용이 가능하다..
+ * 
+ * 5. while문에서 null 아닐때까지 파일을 읽어 콘솔창에 출력하세요..
+ * 
+ * 
+ */
+public class TestIO2 {
+
+	public static void main(String[] args) {
+		FileInputStream fileIn = null;
+		InputStreamReader inputReader = null;
+		BufferedReader bufIn = null;
+		String str;
+		try {
+			fileIn = new FileInputStream("Mydata.txt");
+			inputReader = new InputStreamReader(fileIn);
+			bufIn = new BufferedReader(inputReader);
+			while((str = bufIn.readLine()) != null) {
+				System.out.println(str);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileIn.close();
+				bufIn.close();
+				inputReader.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}
