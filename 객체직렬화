@@ -1,0 +1,70 @@
+package edu.scsa.day5;
+
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+class Food implements Serializable {
+
+	String fName;
+	int price;
+	String info;
+
+	public Food(String fName, int price, String info) {
+		super();
+		this.fName = fName;
+		this.price = price;
+		this.info = info;
+	}
+	
+	@Override
+	public String toString() {
+		return "Food [fName=" + fName + ", price=" + price + ", info=" + info + "]";
+	}
+}
+
+public class TestIO3 {
+
+	public static void main(String[] args) {
+		Food food1 = new Food("삼겹살", 13000, "맛있어요");
+		Food food2 = new Food("돈가스", 7000, "늦게나와요");
+		ObjectOutputStream objO = null;
+		ObjectInputStream objI = null;
+		Food food = null;
+		
+		try {
+			// 객체 정보를 파일에 저장..
+			objO = new ObjectOutputStream(new FileOutputStream("food.dat"));
+			objO.writeObject(food1);
+			objO.writeObject(food2);
+			System.out.println("객체 정보 write 완료...");
+
+			// 파일에 저장된 객체 정보를 읽어서 콘솔에 출력
+			objI = new ObjectInputStream(new FileInputStream("food.dat"));
+			while ((food = (Food) objI.readObject()) != null) {
+				System.out.println(food);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (EOFException e) {
+			System.out.println("파일의 끝입니다..");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (objO != null)
+				try {
+					objO.close();
+					objI.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+}
