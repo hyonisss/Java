@@ -31,6 +31,7 @@ public class TestIO2 {
 			fileIn = new FileInputStream("Mydata.txt");
 			inputReader = new InputStreamReader(fileIn);
 			bufIn = new BufferedReader(inputReader);
+			//	bufIn = new BufferedReader(new InputStreamReader(new FileInputStream("Mydata.txt"))); //한줄로 써도 
 			while((str = bufIn.readLine()) != null) {
 				System.out.println(str);
 			}
