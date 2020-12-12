@@ -54,7 +54,7 @@ public class Engineer {
 	}
 	public void setName(String name)
 	{
-		//유효성 검증....
+		//유효성 검증..
 		if(name!=null && name.length()!=0)
 		{
 			this.name = name;
