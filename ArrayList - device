@@ -4,7 +4,7 @@ package edu.scsa.day4.device;
 /*
  * IDevice implements 받아 구현
  * 데이터 저장 : ArrayList
- * 싱글턴...
+ * 싱글턴
  * 
  */
 import java.util.*;
